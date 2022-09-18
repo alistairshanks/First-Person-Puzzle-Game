@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LazerGeneration : MonoBehaviour
 {
-    int maxBounces = 5;
+    public int maxBounces = 100;
     private LineRenderer lr;
     [SerializeField]
     private Transform startPoint;
@@ -21,12 +21,21 @@ public class LazerGeneration : MonoBehaviour
 
     }
 
-    private void Update()
+   /* private void Update()
     {
         // cast lazer forward
         CastLazer(transform.position, -transform.forward);
 
     }
+
+    */
+   private void LateUpdate()
+    {
+        // cast lazer forward
+        CastLazer(transform.position, -transform.forward);
+    }
+ 
+
 
     void CastLazer(Vector3 position, Vector3 direction)
     {
@@ -45,7 +54,7 @@ public class LazerGeneration : MonoBehaviour
 
                 if(hit.transform.tag != "Mirror" && reflectOnlyMirror)
                 {
-                    for(int j = (i+1); j <= 5; j++)
+                    for(int j = (i+1); j <= maxBounces; j++)
                     {
                         lr.SetPosition(j, hit.point);
                     }
