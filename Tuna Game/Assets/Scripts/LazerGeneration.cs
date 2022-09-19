@@ -21,37 +21,30 @@ public class LazerGeneration : MonoBehaviour
 
     }
 
-   /* private void Update()
+    private void Update()
     {
         // cast lazer forward
         CastLazer(transform.position, -transform.forward);
 
     }
 
-    */
-   private void LateUpdate()
-    {
-        // cast lazer forward
-        CastLazer(transform.position, -transform.forward);
-    }
- 
 
 
     void CastLazer(Vector3 position, Vector3 direction)
     {
         lr.SetPosition(0, startPoint.position);
 
-            for(int i=0; i< maxBounces; i++)
+        for (int i = 0; i < maxBounces; i++)
         {
             Ray ray = new Ray(position, direction);
             RaycastHit hit;
 
-            if(Physics.Raycast( ray, out hit, 300, 1))
+            if (Physics.Raycast(ray, out hit, 300, 1))
             {
-                position = hit.point;
+                position = hit.point - ray.direction * 0.01f;
                 direction = Vector3.Reflect(direction, hit.normal);
-                lr.SetPosition(i + 1, hit.point);
-
+                lr.SetPosition(i + 1, hit.point - ray.direction * 0.01f);
+                
                 if(hit.transform.tag != "Mirror" && reflectOnlyMirror)
                 {
                     for(int j = (i+1); j <= maxBounces; j++)
@@ -61,7 +54,9 @@ public class LazerGeneration : MonoBehaviour
                     break;
                 }    
             }
+            
 
+            }
         }
     }
-}
+
