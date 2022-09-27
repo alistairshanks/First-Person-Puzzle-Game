@@ -33,6 +33,8 @@ public class CameraFollowMouse : MonoBehaviour
 
         //rotate and cam orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+
+        //tells which direction we are facing on x axis for movement, so player can walk forward in direction they are facing
         playerOrientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
 

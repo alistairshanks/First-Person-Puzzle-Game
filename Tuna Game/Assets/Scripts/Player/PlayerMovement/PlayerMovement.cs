@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     
     Vector3 moveDirecton;
 
-    public Transform orientation;
+    public Transform playerOrientation;
 
     Rigidbody rb;
 
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
     private void MovePlayer()
     {
         //calculate movement direction
-        moveDirecton = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirecton = playerOrientation.forward * verticalInput + playerOrientation.right * horizontalInput;
 
         //if on ground
         if(grounded)
