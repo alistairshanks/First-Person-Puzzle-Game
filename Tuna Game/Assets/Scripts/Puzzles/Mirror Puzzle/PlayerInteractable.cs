@@ -20,9 +20,6 @@ public class PlayerInteractable : MonoBehaviour
     
 
 
-
-
-
     public void TurnThisMirror()
     {
         //add the rotation factor onto the current rotation of the mirror.
