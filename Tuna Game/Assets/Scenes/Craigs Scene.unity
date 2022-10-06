@@ -472,7 +472,7 @@ MonoBehaviour:
   jumpForce: 12
   jumpCooldown: 1
   airMultiplier: 0.4
-  orientation: {fileID: 1504628917}
+  playerOrientation: {fileID: 1504628917}
   jumpKey: 32
   playerHeight: 2
   whatIsGround:

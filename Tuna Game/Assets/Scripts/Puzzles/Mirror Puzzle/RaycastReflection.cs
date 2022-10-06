@@ -6,6 +6,8 @@ using UnityEngine;
 public class RaycastReflection : MonoBehaviour
 {
 
+	public int whichLightSource = 1;
+
 	//number of reflections that we want
 	public int reflections;
 
@@ -41,6 +43,8 @@ public class RaycastReflection : MonoBehaviour
 			//check if raycast hits anything
 			if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
 			{
+				hit.transform.SendMessage("SolvePuzzlePart" + whichLightSource);
+
 				//increase vertex count by 1 (each time we loop and hit something)
 				lineRenderer.positionCount += 1;
 				//set position of next vertex to point where raycast hits something

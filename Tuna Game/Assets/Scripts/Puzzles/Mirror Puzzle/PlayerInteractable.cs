@@ -10,7 +10,7 @@ public class PlayerInteractable : MonoBehaviour
 
     public void PlayerInteract()
     {
-        Debug.Log("message received");
+        
 
         if (this.tag == "Mirror") 
         {
