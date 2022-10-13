@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class MirrorPuzzleHandler : MonoBehaviour
 {
-   /* public GameObject lightSource1;
-    public GameObject lightSource2;
-    public GameObject lightDestination1;
-    public GameObject lightDestination2;
-    public GameObject lightDestination3;
-    public GameObject lightDestination4;
-   */
 
 	private Ray ray;
 	private RaycastHit hit;
 
-	private int puzzleStage = 2;
+	private int puzzleStage = 1;
 
 	//number of reflections that we want
 	public int reflections;
@@ -28,6 +21,8 @@ public class MirrorPuzzleHandler : MonoBehaviour
 	public LineRenderer lineRenderer1;
 	public LineRenderer lineRenderer2;
 
+	private Vector3 lightSourcePosition = new Vector3(0, 0, 0); 
+
 
 
 
@@ -36,9 +31,32 @@ public class MirrorPuzzleHandler : MonoBehaviour
 
     private void Update()
     {
-		// call sendlight function and define a transform and line renderer, a lightsource ID and which stage the puzzle is at
-		SendLight(lightSourceTransform1, lineRenderer1, 1, puzzleStage);
-		SendLight(lightSourceTransform2, lineRenderer2, 2, puzzleStage);
+		// switch statement to turn each light on and off, passing a transform, a line renderer and which stage the puzzle is at.
+
+		switch (puzzleStage)
+        {
+			case 1: SendLight(lightSourceTransform1, lineRenderer1, 1, puzzleStage);
+                break;
+
+            case 2:
+				SendLight(lightSourceTransform2, lineRenderer2, 2, puzzleStage);
+				lineRenderer1.positionCount = 0;
+				break;
+
+			case 3:
+				SendLight(lightSourceTransform1, lineRenderer1, 1, puzzleStage);
+				SendLight(lightSourceTransform2, lineRenderer2, 2, puzzleStage);
+				break;
+
+			case 4:
+				lineRenderer1.positionCount = 0;
+				lineRenderer2.positionCount = 0;
+
+				break;
+
+			default: break;
+		}
+
 
     }
 
@@ -47,25 +65,25 @@ public class MirrorPuzzleHandler : MonoBehaviour
 
 	private void PuzzlePartSolved(int whichPuzzleStage)
     {
-		if (whichPuzzleStage == 2)
+		if (whichPuzzleStage == 1)
         {
 			//do whatever happens after solving first puzzle part
 			Debug.Log("puzzle 1 solved");
         }
 
-		else if (whichPuzzleStage == 3)
+		else if (whichPuzzleStage == 2)
         {
 			//do whatever happens after solving second puzzle part
 			Debug.Log("puzzle 2 solved");
         }
 
-		else if (whichPuzzleStage == 4)
+		else if (whichPuzzleStage == 3)
         {
 			//do whatever happens after solving third puzzle
 			Debug.Log("puzzle 3 solved");
         }
 
-		else if (whichPuzzleStage == 5)
+		else if (whichPuzzleStage == 4)
 		{
 			//do whatever happens after solving third puzzle
 			Debug.Log("puzzle 4 solved");
