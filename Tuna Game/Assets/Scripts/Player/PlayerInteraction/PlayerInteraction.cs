@@ -11,29 +11,29 @@ public class PlayerInteraction : MonoBehaviour
 
     public Transform playerOrientation;
 
-
     private GameObject thisMirror;
+
 
     private void Update()
     {
-        //check if we press the F key and if we do then trigger function on object
-        if (Input.GetKeyDown(KeyCode.F))
+        //create a new ray starting from player position and pointing in direction player is facing
+        playerInteractionRay = new Ray(transform.position, playerOrientation.forward);
+
+        //check if ray hits anything and check the tag on whatever it has hit
+        if (Physics.Raycast(playerInteractionRay.origin, playerInteractionRay.direction, out hit, playerReach))
         {
 
 
-
-            //create a new ray starting from player position and pointing in direction player is facing
-            playerInteractionRay = new Ray(transform.position, playerOrientation.forward);
-
-            //check if ray hits anything and check the tag on whatever it has hit
-            if (Physics.Raycast(playerInteractionRay.origin, playerInteractionRay.direction, out hit, playerReach))
+            //check if we press the F key and if we do then trigger function on object
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 //send message
                 hit.transform.SendMessage("PlayerInteract");
             }
-
         }
 
+
+        
     }
 
 

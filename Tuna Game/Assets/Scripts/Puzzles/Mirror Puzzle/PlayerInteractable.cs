@@ -25,4 +25,6 @@ public class PlayerInteractable : MonoBehaviour
         //add the rotation factor onto the current rotation of the mirror.
         transform.eulerAngles = transform.eulerAngles + rotationOfMirror;
     }
+
+
 }
