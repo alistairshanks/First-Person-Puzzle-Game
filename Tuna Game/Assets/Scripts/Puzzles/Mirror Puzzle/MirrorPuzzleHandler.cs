@@ -21,9 +21,25 @@ public class MirrorPuzzleHandler : MonoBehaviour
 	public LineRenderer lineRenderer1;
 	public LineRenderer lineRenderer2;
 
-	private Vector3 lightSourcePosition = new Vector3(0, 0, 0); 
+
+	//create an array to store the mirrors
+	public GameObject[] arrayOfMirrors;
+
+	//create an array to hold the possible angles for mirrors to be at
+	private Vector3[] arrayOfAngles = new Vector3[] {new Vector3(0,0,0), new Vector3(0,45,0), new Vector3(0,90,0), new Vector3(0,135,0) };
 
 
+
+    private void Start()
+    {
+		//loop through array of mirrors and set each one to a random index of our array of angles
+		for (int i = 0; i < arrayOfMirrors.Length; i++)
+		{
+			arrayOfMirrors[i].transform.eulerAngles = arrayOfAngles[Random.Range(0, arrayOfAngles.Length)];
+
+
+        }
+    }
 
 
 
@@ -35,22 +51,36 @@ public class MirrorPuzzleHandler : MonoBehaviour
 
 		switch (puzzleStage)
         {
-			case 1: SendLight(lightSourceTransform1, lineRenderer1, 1, puzzleStage);
-                break;
+			
+
+			case 1: SendLight(lightSourceTransform1, lineRenderer1, puzzleStage);
+				Debug.Log("you are on puzzle stage 1");
+				break;
 
             case 2:
-				SendLight(lightSourceTransform2, lineRenderer2, 2, puzzleStage);
+				SendLight(lightSourceTransform2, lineRenderer2, puzzleStage);
 				lineRenderer1.positionCount = 0;
+				Debug.Log("you are on puzzle stage 2");
 				break;
 
 			case 3:
-				SendLight(lightSourceTransform1, lineRenderer1, 1, puzzleStage);
-				SendLight(lightSourceTransform2, lineRenderer2, 2, puzzleStage);
+				SendLight(lightSourceTransform1, lineRenderer1, puzzleStage);
+				SendLight(lightSourceTransform2, lineRenderer2, puzzleStage);
+				Debug.Log("you are on puzzle stage 3");
 				break;
 
+
 			case 4:
+				SendLight(lightSourceTransform1, lineRenderer1, puzzleStage);
+				SendLight(lightSourceTransform2, lineRenderer2, puzzleStage);
+				Debug.Log("you are on puzzle stage 4");
+				break;
+
+
+			case 5:
 				lineRenderer1.positionCount = 0;
 				lineRenderer2.positionCount = 0;
+				Debug.Log("puzzle solved");
 
 				break;
 
@@ -68,25 +98,25 @@ public class MirrorPuzzleHandler : MonoBehaviour
 		if (whichPuzzleStage == 1)
         {
 			//do whatever happens after solving first puzzle part
-			Debug.Log("puzzle 1 solved");
+
         }
 
 		else if (whichPuzzleStage == 2)
         {
 			//do whatever happens after solving second puzzle part
-			Debug.Log("puzzle 2 solved");
+
         }
 
 		else if (whichPuzzleStage == 3)
         {
 			//do whatever happens after solving third puzzle
-			Debug.Log("puzzle 3 solved");
+
         }
 
 		else if (whichPuzzleStage == 4)
 		{
 			//do whatever happens after solving third puzzle
-			Debug.Log("puzzle 4 solved");
+		
 		}
 
 
@@ -98,7 +128,7 @@ public class MirrorPuzzleHandler : MonoBehaviour
 
 
 
-    private void SendLight(Transform thisLightSourceTransform, LineRenderer lineRenderer, int lightSourceID, int thisPuzzleStage)
+    private void SendLight(Transform thisLightSourceTransform, LineRenderer lineRenderer, int thisPuzzleStage)
     {
 		{
 
