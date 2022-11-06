@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class MirrorNamer : MonoBehaviour
 {
-    public GameObject[] mirrors;
 
+    //class used to quickly name an array of objects in editor with a chosen name then a number
+    
+
+    public GameObject[] mirrors;
 
     private void OnValidate()
     {

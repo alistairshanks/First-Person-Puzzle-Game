@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LazerGeneration : MonoBehaviour
 {
+
+    //old class which handled laser/raycast reflections but was redesigned.
+
     public int maxBounces = 100;
     private LineRenderer lr;
     [SerializeField]

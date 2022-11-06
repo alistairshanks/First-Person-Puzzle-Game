@@ -5,6 +5,10 @@ using UnityEngine;
 public class MirrorPuzzleHandler : MonoBehaviour
 {
 
+	/*old class which handled all the logic for the mirror puzzle. Redesigned based on it being messy
+	and hard to understand/read/modify.
+	*/
+
 	private Ray ray;
 	private RaycastHit hit;
 
@@ -53,16 +57,18 @@ public class MirrorPuzzleHandler : MonoBehaviour
         {
 			
 
+			//player has not completed any of the puzzle, lightsource1 is switched on
 			case 1: SendLight(lightSourceTransform1, lineRenderer1, puzzleStage);
 				Debug.Log("you are on puzzle stage 1");
 				break;
-
+			//player has completed the first part of the puzzle, lightsource2 is switched on 
             case 2:
 				SendLight(lightSourceTransform2, lineRenderer2, puzzleStage);
 				lineRenderer1.positionCount = 0;
 				Debug.Log("you are on puzzle stage 2");
 				break;
 
+			//player has completed second part of the puzzle, both light sources are switched on
 			case 3:
 				SendLight(lightSourceTransform1, lineRenderer1, puzzleStage);
 				SendLight(lightSourceTransform2, lineRenderer2, puzzleStage);
@@ -95,30 +101,6 @@ public class MirrorPuzzleHandler : MonoBehaviour
 
 	private void PuzzlePartSolved(int whichPuzzleStage)
     {
-		if (whichPuzzleStage == 1)
-        {
-			//do whatever happens after solving first puzzle part
-
-        }
-
-		else if (whichPuzzleStage == 2)
-        {
-			//do whatever happens after solving second puzzle part
-
-        }
-
-		else if (whichPuzzleStage == 3)
-        {
-			//do whatever happens after solving third puzzle
-
-        }
-
-		else if (whichPuzzleStage == 4)
-		{
-			//do whatever happens after solving third puzzle
-		
-		}
-
 
 
 		//add 1 to current puzzle stage

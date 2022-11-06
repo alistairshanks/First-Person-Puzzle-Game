@@ -18,7 +18,8 @@ public class RaycastReflection : MonoBehaviour
 	private LineRenderer lineRenderer;
 	private Ray ray;
 	private RaycastHit hit;
-	private Vector3 direction;
+
+	public bool lightIsOn = false;
 
 	private void Awake()
 	{
@@ -28,8 +29,23 @@ public class RaycastReflection : MonoBehaviour
 
 	private void Update()
 	{
-		//send a ray forward
+		if (lightIsOn)
+		{ 
+		TurnLightOn();
+		}
+
+		else if (!lightIsOn)
+        {
+			this.lineRenderer.positionCount = 0;
+        }
+	}
+
+
+	public void TurnLightOn()
+    {
+		//set starting point and direction of ray
 		ray = new Ray(transform.position, -transform.forward);
+
 		// sets the amount of vertices to 2 (0 and 1)
 		lineRenderer.positionCount = 1;
 		//set the position of the first point on the line renderer
@@ -41,9 +57,18 @@ public class RaycastReflection : MonoBehaviour
 		for (int i = 0; i < reflections; i++)
 		{
 			//check if raycast hits anything
-			if(Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
+			if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
 			{
-				hit.transform.SendMessage("SolvePuzzlePart" + whichLightSource);
+
+				/*  Try to get the class MirrorPuzzleTarget and if it is present
+				then call the desired function for the next stage of the puzzle   */
+				MirrorPuzzleTarget mPT = hit.transform.GetComponent<MirrorPuzzleTarget>();
+				if (mPT != null)
+				{
+					mPT.HitByRay(whichLightSource);
+				}
+
+
 
 				//increase vertex count by 1 (each time we loop and hit something)
 				lineRenderer.positionCount += 1;
@@ -64,3 +89,4 @@ public class RaycastReflection : MonoBehaviour
 		}
 	}
 }
+

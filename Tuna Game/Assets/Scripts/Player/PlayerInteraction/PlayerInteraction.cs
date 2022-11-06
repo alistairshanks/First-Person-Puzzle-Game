@@ -4,14 +4,27 @@ using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
 {
+
+    /*
+     This class sends a ray out in front of player and checks if they press F. If they do
+     and the ray hits something which has a class containing the function PlayerInteract()
+     then this function is triggered. This allows player to interact with any objects containing
+     a class which inherits from PlayerInteractable class.
+    */
+
+
+    //variable for how far the ray should go in front of player
     public float playerReach;
 
+
+
+  
     private Ray playerInteractionRay;
     private RaycastHit hit;
-
+    
+    //reference for the orientation of the player taken from movement script
     public Transform playerOrientation;
 
-    private GameObject thisMirror;
 
 
     private void Update()
@@ -36,7 +49,7 @@ public class PlayerInteraction : MonoBehaviour
         
     }
 
-
+    //Draws line to represent ray for the direction and reach of player
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.cyan;

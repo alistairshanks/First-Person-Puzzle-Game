@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1148141149973915652}
   - component: {fileID: 1148141149973915651}
   - component: {fileID: 1148141149973915650}
-  - component: {fileID: 1148141149973915649}
+  - component: {fileID: 4983596866270273929}
   m_Layer: 0
   m_Name: LightSource
   m_TagString: Untagged
@@ -211,7 +211,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &1148141149973915649
+--- !u!114 &4983596866270273929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,8 +224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whichLightSource: 1
-  reflections: 16
-  maxLength: 100
+  reflections: 0
+  maxLength: 0
 --- !u!1 &1148141150138142865
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     public KeyCode jumpKey = KeyCode.Space;
 
-    //we must check player is on ground so that we do not apply drag when the player is in the air
+    //check player is on ground so that we do not apply drag when the player is in the air
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;

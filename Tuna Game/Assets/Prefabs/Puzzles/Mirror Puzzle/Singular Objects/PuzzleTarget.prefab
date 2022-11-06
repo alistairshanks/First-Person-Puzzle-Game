@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5995760057741858026}
   - component: {fileID: 5431217719340666225}
   - component: {fileID: 8442113748882850990}
-  - component: {fileID: 6299178564100225265}
+  - component: {fileID: 5445541085410046698}
   m_Layer: 0
   m_Name: PuzzleTarget
   m_TagString: Untagged
@@ -96,7 +96,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6299178564100225265
+--- !u!114 &5445541085410046698
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -109,3 +109,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puzzleTargetNumber: 0
+  lineRenderer: {fileID: 0}
