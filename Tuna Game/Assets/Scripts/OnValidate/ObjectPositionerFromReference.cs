@@ -11,7 +11,7 @@ public class ObjectPositionerFromReference : ObjectPositioner
     */
      
    
-    public override void OnValidate()
+    public void OnValidate()
     {
 
         if (underSameParent)
@@ -21,31 +21,42 @@ public class ObjectPositionerFromReference : ObjectPositioner
             {
                 //add on distance  for x and z axis
                
-                t.x = referenceObject.localPosition.x + xDistance;
-                t.y = referenceObject.localPosition.y + yDistance;
-                t.z = referenceObject.localPosition.z + zDistance;
+                newPosition.x = referenceObject.localPosition.x + xDistance;
+                newPosition.y = referenceObject.localPosition.y + yDistance;
+                newPosition.z = referenceObject.localPosition.z + zDistance;
             
 
                 //set position
-                transform.localPosition = t;
+                transform.localPosition = newPosition;
+            }
+
+            //add log warning to let designer know something has not been set that could be
+            else
+            {
+                Debug.LogWarning("No reference object set", referenceObject);
             }
         }
 
-        else if (!underSameParent)
+        else 
         {
             //check we have reference object to avoid errors
             if (referenceObject != null)
             {
                 //add on distance  for x and z axis
-               
-                t.x = referenceObject.transform.position.x + xDistance;
-                t.y = referenceObject.transform.position.y + yDistance;
-                t.z = referenceObject.transform.position.z + zDistance;
+
+                newPosition.x = referenceObject.transform.position.x + xDistance;
+                newPosition.y = referenceObject.transform.position.y + yDistance;
+                newPosition.z = referenceObject.transform.position.z + zDistance;
 
                 //set position
-                transform.position = t;
+                transform.position = newPosition;
             }
 
+            //add log warning to let designer know something has not been set that could be
+            else
+            {
+                Debug.LogWarning("No reference Object set", referenceObject);
+            }
 
         }
     }

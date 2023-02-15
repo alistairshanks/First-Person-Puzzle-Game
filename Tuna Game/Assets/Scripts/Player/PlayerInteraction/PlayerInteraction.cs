@@ -40,8 +40,9 @@ public class PlayerInteraction : MonoBehaviour
             //check if we press the F key and if we do then trigger function on object
             if (Input.GetKeyDown(KeyCode.F))
             {
-                //send message
-                hit.transform.SendMessage("PlayerInteract");
+                var interactable = hit.transform.GetComponent<PlayerInteractable>();
+                if (interactable != null)
+                    interactable.PlayerInteract();
             }
         }
 

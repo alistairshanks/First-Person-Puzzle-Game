@@ -15,9 +15,9 @@ public class MirrorPuzzleTarget : MonoBehaviour
   */
 
     public int puzzleTargetNumber;
-    public event Action<int, int> rayEvent;
+    public event Action<LightSourceID, int> rayEvent;
 
-    public void HitByRay( int whicheverLightSource)
+    public void HitByRay( LightSourceID whicheverLightSource)
     {
         if (rayEvent != null)
         {

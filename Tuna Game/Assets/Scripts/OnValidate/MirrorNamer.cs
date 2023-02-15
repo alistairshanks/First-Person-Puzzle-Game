@@ -6,9 +6,9 @@ public class MirrorNamer : MonoBehaviour
 {
 
     //class used to quickly name an array of objects in editor with a chosen name then a number
-    
 
-    public GameObject[] mirrors;
+
+    [SerializeField] private GameObject[] mirrors;
 
     private void OnValidate()
     {

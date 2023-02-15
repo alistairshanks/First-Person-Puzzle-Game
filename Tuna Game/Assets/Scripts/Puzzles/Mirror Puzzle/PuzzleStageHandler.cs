@@ -26,40 +26,48 @@ public class PuzzleStageHandler : MonoBehaviour
     //action to send to LightController class to turn lights on and off
     public event Action<int, bool> LightControl;
 
+    public TextDisplayController myTextDisplayController;
 
 
 
 
-    private void OnRayEvent(int whichLightSource, int puzzleTargetNumber)
+
+    private void OnRayEvent(LightSourceID whichLightSource, int puzzleTargetNumber)
     {
         //Debug.Log("event was received and the light was sent by light source " + whichLightSource);
 
         switch (puzzleStage)
         {
             case 0:
-                if (whichLightSource == 1 && puzzleTargetNumber == 1)
+                if ((int)whichLightSource == 0 && puzzleTargetNumber == 1)
                 {
                     //turn off light source 1, turn on light source 2
-                    LightControl(1, false);
-                    LightControl(2, true);
+                    LightControl(0, false);
+                    LightControl(1, true);
 
                     Debug.Log("You have solved the first part of the puzzle");
 
                     puzzleStage++;
+
+                    myTextDisplayController.ShowText("You have solved the first part of the puzzle");
+
+
                 }
 
                 break;
 
             case 1:
-                if (whichLightSource == 2 && puzzleTargetNumber == 2)
+                if ((int)whichLightSource == 1 && puzzleTargetNumber == 2)
                 {
                     //turn light source 1 back on and keep light source 2 on
+                    LightControl(0, true);
                     LightControl(1, true);
-                    LightControl(2, true);
 
                     Debug.Log("You have solved the second part of the puzzle");
 
                     puzzleStage++;
+
+                    myTextDisplayController.ShowText("You have solved the second part of the puzzle");
                 }
 
                 break;
@@ -68,20 +76,23 @@ public class PuzzleStageHandler : MonoBehaviour
                 //the player chooses.
 
             case 2:
-                if (whichLightSource == 1 && puzzleTargetNumber == 3)
+                if ((int)whichLightSource == 0 && puzzleTargetNumber == 3)
                 {
                     //keep both lights on
                     Debug.Log("You have solved the third part of the puzzle");
                     puzzleStage++;
 
+                    myTextDisplayController.ShowText("You have solved the third part of the puzzle");
                     playerHitPuzzleTarget3First = true;
                 }
 
-                else if (whichLightSource == 2 && puzzleTargetNumber == 4)
+                else if ((int)whichLightSource == 1 && puzzleTargetNumber == 4)
                 {
                     //keep both lights on 
                     Debug.Log("You have solved the third part of the puzzle");
                     puzzleStage++;
+
+                    myTextDisplayController.ShowText("You have solved the third part of the puzzle");
 
                     playerHitPuzzleTarget3First = false;
                 }
@@ -89,21 +100,25 @@ public class PuzzleStageHandler : MonoBehaviour
                 break;
 
             case 3:
-                if (whichLightSource == 1 && puzzleTargetNumber == 3 && !playerHitPuzzleTarget3First)
+                if ((int)whichLightSource == 0 && puzzleTargetNumber == 3 && !playerHitPuzzleTarget3First)
                 {
                     //turn all lights off
+                    LightControl(0, false);
                     LightControl(1, false);
-                    LightControl(2, false);
                     Debug.Log("You have solved the whole of the puzzle");
+
+                    myTextDisplayController.ShowText("You have solved the entire the puzzle");
                     puzzleStage++;
                 }
 
-                else if (whichLightSource == 2 && puzzleTargetNumber == 4 && playerHitPuzzleTarget3First)
+                else if ((int)whichLightSource == 1 && puzzleTargetNumber == 4 && playerHitPuzzleTarget3First)
                 {
                     //turn all lights off
+                    LightControl(0, false);
                     LightControl(1, false);
-                    LightControl(2, false);
                     Debug.Log("You have solved the whole of the puzzle");
+
+                    myTextDisplayController.ShowText("You have solved the entire the puzzle");
                     puzzleStage++;
                 }
                 
@@ -120,19 +135,18 @@ public class PuzzleStageHandler : MonoBehaviour
 
     private void Awake()
     {
-        for ( int i = 0; i < puzzleTargetsToObserve.Length; i++)
-
-        if (puzzleTargetsToObserve[i] != null)
+        for (int i = 0; i < puzzleTargetsToObserve.Length; i++)
         {
-            puzzleTargetsToObserve[i].rayEvent += OnRayEvent;
+
+            if (puzzleTargetsToObserve[i] != null)
+            {
+                puzzleTargetsToObserve[i].rayEvent += OnRayEvent;
+            }
         }
      
 
 
     }
-
-
-
 
 
     private void OnDestroy()

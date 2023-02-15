@@ -10,7 +10,7 @@ public abstract class ObjectPositioner : MonoBehaviour
     public Transform referenceObject;
 
     //variable to hold new position
-    public Vector3 t = new Vector3(0, 0, 0);
+   protected Vector3 newPosition = Vector3.zero;
 
 
     //distance you would like objects from reference objects
@@ -21,8 +21,5 @@ public abstract class ObjectPositioner : MonoBehaviour
 
     public bool underSameParent = false;
 
-
-
-    public abstract void OnValidate();
     
 }

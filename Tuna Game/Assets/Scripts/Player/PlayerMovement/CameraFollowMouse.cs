@@ -14,10 +14,19 @@ public class CameraFollowMouse : MonoBehaviour
     float xRotation;
     float yRotation;
 
+
+
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        GameObject sceneCamObj = GameObject.Find("SceneCamera");
+        if (sceneCamObj != null)
+        {
+            // Should output the real dimensions of scene viewport
+            Debug.Log(sceneCamObj.GetComponent<Camera>().pixelRect);
+        }
 
     }
 

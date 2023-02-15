@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum LightSourceID {LightSourceID1, LightSourceID2}
+
 [RequireComponent(typeof(LineRenderer))]
 public class RaycastReflection : MonoBehaviour
 {
 
-	public int whichLightSource = 1;
+	public LightSourceID ID;
 
 	//number of reflections that we want
 	public int reflections;
@@ -18,6 +20,8 @@ public class RaycastReflection : MonoBehaviour
 	private LineRenderer lineRenderer;
 	private Ray ray;
 	private RaycastHit hit;
+
+	private const string interactableName = "Mirror";
 
 	public bool lightIsOn = false;
 
@@ -62,10 +66,12 @@ public class RaycastReflection : MonoBehaviour
 
 				/*  Try to get the class MirrorPuzzleTarget and if it is present
 				then call the desired function for the next stage of the puzzle   */
-				MirrorPuzzleTarget mPT = hit.transform.GetComponent<MirrorPuzzleTarget>();
-				if (mPT != null)
+				MirrorPuzzleTarget thisMirrorPuzzleTarget = hit.transform.GetComponent<MirrorPuzzleTarget>();
+				if (thisMirrorPuzzleTarget != null)
 				{
-					mPT.HitByRay(whichLightSource);
+					thisMirrorPuzzleTarget.HitByRay(ID);
+
+					
 				}
 
 
@@ -77,7 +83,7 @@ public class RaycastReflection : MonoBehaviour
 
 				remainingLength -= Vector3.Distance(ray.origin, hit.point);
 				ray = new Ray(hit.point + hit.normal * 0.001f, Vector3.Reflect(ray.direction, hit.normal));
-				if (hit.collider.tag != "Mirror")
+				if (!hit.collider.CompareTag(interactableName))
 					break;
 			}
 			else
@@ -89,4 +95,5 @@ public class RaycastReflection : MonoBehaviour
 		}
 	}
 }
+
 

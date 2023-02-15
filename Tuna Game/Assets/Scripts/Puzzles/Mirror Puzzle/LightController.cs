@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class LightController : MonoBehaviour
 {
@@ -13,57 +14,46 @@ public class LightController : MonoBehaviour
     private PuzzleStageHandler puzzleStageHandler;
 
     //references to the two light sources, each containing their own RaycastReflection class
-    public RaycastReflection lightSource1;
-    public RaycastReflection lightSource2;
+   
+
+    public RaycastReflection[] lightSourceArray; 
 
 
     private void Start()
     {
         //turn light source 1 on for first stage
-        lightSource1.lightIsOn = true;
+        lightSourceArray.FirstOrDefault(x => (int)x.ID == 0).lightIsOn = true; 
     }
 
     //function which receives info via the LightControl event in PuzzleStageHandler class
     // then handles logic and controls a bool on the RaycastReflection class
     void OnLightControl(int whichLightSource, bool onOff)
     {
-        if (whichLightSource == 1 && onOff == false)
-        {
-            lightSource1.lightIsOn = false;
-        }
 
-        if (whichLightSource == 1 && onOff == true)
-        {
-            lightSource1.lightIsOn = true;
-        }
+        Debug.Log("hit by " + whichLightSource);
 
-        if (whichLightSource == 2 && onOff == false)
-        {
-            lightSource2.lightIsOn = false;
-        }
+        lightSourceArray.FirstOrDefault(x => (int)x.ID == whichLightSource).lightIsOn = onOff;
 
-        if (whichLightSource == 2 && onOff == true)
-        {
-            lightSource2.lightIsOn = true;
-        }
+
     }
 
-    private void Awake()
+
+    private void OnEnable()
     {
         if (puzzleStageHandler != null)
-        { 
-        puzzleStageHandler.LightControl += OnLightControl;
+        {
+            puzzleStageHandler.LightControl += OnLightControl;
         }
-
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (puzzleStageHandler != null)
         {
             puzzleStageHandler.LightControl -= OnLightControl;
         }
     }
+
 
 
 }
