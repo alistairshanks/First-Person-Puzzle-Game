@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class PuzzleTargetHitInfo : MonoBehaviour
 {
-  public  int puzzleTargetNumber;
-  public  int LightSourceID;
+    [SerializeField] private int puzzleTargetNumber;
+    [SerializeField] private int LightSourceID;
 }

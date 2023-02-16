@@ -5,19 +5,19 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
-    public float groundDrag;
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    private bool readyToJump;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float groundDrag;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpCooldown;
+    [SerializeField] private float airMultiplier;
+    [SerializeField] private bool readyToJump;
 
     private float horizontalInput;
     private float verticalInput;
     
     Vector3 moveDirecton;
 
-    public Transform playerOrientation;
+    [SerializeField] private Transform playerOrientation;
 
     Rigidbody rb;
 

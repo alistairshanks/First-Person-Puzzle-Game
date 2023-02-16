@@ -9,22 +9,49 @@ public enum LightSourceID {LightSourceID1, LightSourceID2}
 public class RaycastReflection : MonoBehaviour
 {
 
-	public LightSourceID ID;
+	[SerializeField] private LightSourceID myLightSourceID;
+
+	public LightSourceID MyLightSourceID
+    {
+		get
+        {
+			return myLightSourceID;
+        }
+
+        set
+        {
+			myLightSourceID = value;
+        }
+    }
+
+    [SerializeField] private bool lightIsOn = false;
+
+	public bool LightIsOn
+	{
+		get
+		{
+			return LightIsOn;
+		}
+
+		set
+		{
+			lightIsOn = value;
+		}
+	}
 
 	//number of reflections that we want
-	public int reflections;
+	[SerializeField] private int reflections;
 
-	//how long the raycast will be
-	public float maxLength;
+    //how long the raycast will be
+    [SerializeField] private float maxLength;
+
+	
 
 	//line renderer variable
 	private LineRenderer lineRenderer;
 	private Ray ray;
 	private RaycastHit hit;
-
 	private const string interactableName = "Mirror";
-
-	public bool lightIsOn = false;
 
 	private void Awake()
 	{
@@ -63,19 +90,18 @@ public class RaycastReflection : MonoBehaviour
 		{
 			//check if raycast hits anything
 			if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
-			{
+            {
 
-				/*  Try to get the class MirrorPuzzleTarget and if it is present
+                /*  Try to get the class PuzzleStage class and if it is present
 				then call the desired function for the next stage of the puzzle   */
-				MirrorPuzzleTarget thisMirrorPuzzleTarget = hit.transform.GetComponent<MirrorPuzzleTarget>();
-				if (thisMirrorPuzzleTarget != null)
+                
+				PuzzleStage thisPuzzleStage = hit.transform.GetComponent<PuzzleStage>();
+				if (thisPuzzleStage != null)
 				{
-					thisMirrorPuzzleTarget.HitByRay(ID);
-
+					
+					thisPuzzleStage.HitByRay(myLightSourceID);
 					
 				}
-
-
 
 				//increase vertex count by 1 (each time we loop and hit something)
 				lineRenderer.positionCount += 1;

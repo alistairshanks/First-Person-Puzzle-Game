@@ -1850,28 +1850,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1048542447}
   m_CullTransparentMesh: 1
---- !u!114 &1056707524 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1373983937695795041, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
-  m_PrefabInstance: {fileID: 5646182503740009427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63beac3dcddd5db458427a0083cbe559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1092604096 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5189059395517272938, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
-  m_PrefabInstance: {fileID: 5646182503740009427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63beac3dcddd5db458427a0083cbe559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1153892575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,18 +2225,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb05a1a4a71cefa49875dfca95e9e248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  puzzleTargetsToObserve:
-  - {fileID: 1056707524}
-  - {fileID: 1598595184}
-  - {fileID: 1092604096}
-  - {fileID: 1797204746}
-  currentPuzzleStage: 0
   myTextDisplayController: {fileID: 1160515619}
   puzzleStages:
   - {fileID: 5646182503740009429}
   - {fileID: 5646182503740009428}
   - {fileID: 5646182503740009431}
   - {fileID: 5646182503740009430}
+  listOfSwitchNumbers:
+  - sampleList: 0000000001000000
+  - sampleList: 0100000001000000
+  - sampleList: 0100000001000000
+  - sampleList: 0000000000000000
 --- !u!4 &1496717538
 Transform:
   m_ObjectHideFlags: 0
@@ -2327,17 +2304,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 930077c8083095142853307524b33b92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1598595184 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8509048024255008813, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
-  m_PrefabInstance: {fileID: 5646182503740009427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63beac3dcddd5db458427a0083cbe559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1610519121
@@ -2481,17 +2447,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1797204746 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1527842538309383105, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
-  m_PrefabInstance: {fileID: 5646182503740009427}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63beac3dcddd5db458427a0083cbe559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1838414118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,7 +2551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908755155}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: faffe03d525e0304e9789734f9274f72, type: 3}
   m_Name: 
@@ -2785,7 +2740,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: puzzleStageNumber
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: prerequisitepuzzleStages.Array.size
@@ -2805,7 +2760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: puzzleStageNumber
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: requiredLightSourceID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: prerequisitepuzzleStages.Array.size
@@ -2845,7 +2804,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: puzzleStageNumber
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: requiredLightSourceID
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: prerequisitepuzzleStages.Array.size
@@ -2865,7 +2828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5164597469056829652, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: puzzleStageNumber
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5189059395517272938, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: puzzleTargetNumber

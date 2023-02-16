@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CombinationPuzzleHandler : MonoBehaviour
 {
+
+    //still in progress, put on hold while I rework mirror puzzle 
+
+
     [SerializeField] private int[] correctSequence;
 
     public bool randomSequence;

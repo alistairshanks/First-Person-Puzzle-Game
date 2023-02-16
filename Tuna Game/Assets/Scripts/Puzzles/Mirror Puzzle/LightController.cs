@@ -10,36 +10,38 @@ public class LightController : MonoBehaviour
     depending on which stage the puzzle is at. The events are sent to RaycastReflection class */
 
     //reference to PuzzleStageHandler which sends info on whether to turn lights on or off
-    [SerializeField] 
-    private PuzzleStageHandler puzzleStageHandler;
+    [SerializeField] private PuzzleStageHandler puzzleStageHandler;
 
     //references to the two light sources, each containing their own RaycastReflection class
-   
 
-    public RaycastReflection[] lightSourceArray;
+
+    [SerializeField] private RaycastReflection[] lightSourceArray;
+
+    private bool lightSwitchOn = false;
 
 
     private void Start()
     {
         //turn light source 1 on for first stage
-        lightSourceArray.FirstOrDefault(x => (int)x.ID == 0).lightIsOn = true;
+        lightSourceArray.FirstOrDefault(x => (int)x.MyLightSourceID == 0).LightIsOn = true;
     }
 
     //function which receives info via the LightControl event in PuzzleStageHandler class
     // then handles logic and controls a bool on the RaycastReflection class
-    public void OnLightControl(int whichLightSource, bool onOff)
+    public void OnLightControl(int whichLightSource, int OnOff)
     {
+        
+        if (OnOff > 0)
+        {
+            lightSwitchOn = true;
+        }
+        else
+        {
+            lightSwitchOn = false;
+        }
 
-        Debug.Log("hit by " + whichLightSource);
+        lightSourceArray[whichLightSource].LightIsOn = lightSwitchOn;
 
-        lightSourceArray.FirstOrDefault(x => (int)x.ID == whichLightSource).lightIsOn = onOff;
-
-
-    }
-
-
-    public void ControlMyLights(int whichLightSource, int hello)
-    {
 
     }
 
@@ -47,7 +49,8 @@ public class LightController : MonoBehaviour
     {
         if (puzzleStageHandler != null)
         {
-            puzzleStageHandler.LightControl += OnLightControl;
+            //puzzleStageHandler.LightControl += OnLightControl;
+            puzzleStageHandler.NewLightControl += OnLightControl;
         }
     }
 
@@ -55,7 +58,7 @@ public class LightController : MonoBehaviour
     {
         if (puzzleStageHandler != null)
         {
-            puzzleStageHandler.LightControl -= OnLightControl;
+            puzzleStageHandler.NewLightControl -= OnLightControl;
         }
     }
 

@@ -14,16 +14,14 @@ public class PlayerInteraction : MonoBehaviour
 
 
     //variable for how far the ray should go in front of player
-    public float playerReach;
-
-
-
-  
+    [SerializeField] private float playerReach;
+    //reference for the orientation of the player taken from movement script
+    [SerializeField] private Transform playerOrientation;
     private Ray playerInteractionRay;
     private RaycastHit hit;
     
-    //reference for the orientation of the player taken from movement script
-    public Transform playerOrientation;
+    
+    
 
 
 
@@ -45,8 +43,6 @@ public class PlayerInteraction : MonoBehaviour
                     interactable.PlayerInteract();
             }
         }
-
-
         
     }
 

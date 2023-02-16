@@ -15,179 +15,57 @@ public class PuzzleStageHandler : MonoBehaviour
     should be on or off.
     */
 
-
-
-    //reference to the puzzle targets which will send an event
-    [SerializeField] private MirrorPuzzleTarget[] puzzleTargetsToObserve;
-
     //stores which stage puzzle is at, used in the switch function
-    [SerializeField] private int currentPuzzleStage = 0;
+    private int currentPuzzleStage = 0;
 
-    //stores whether player hit puzzle target 3 or 4 first as these can be done in either order
-    private bool playerHitPuzzleTarget3First;
 
     //action to send to LightController class to turn lights on and off
-    public event Action<int, bool> LightControl;
+    public event Action<int, int> NewLightControl;
 
     public TextDisplayController myTextDisplayController;
 
     [SerializeField] private List<PuzzleStage> puzzleStages;
-    
 
-
-
-
-
-
-
-
-
-
-
-
-    private void OnRayEvent(LightSourceID whichLightSource, int puzzleTargetNumber)
+    // expose a list of lists in the inspector, the index in main list determines puzzle stage
+    // values of lists within the main list determine the light switches
+    [System.Serializable]
+    public class LightSwitchNumbers
     {
-        // ***************trying new method***************
+        public List<int> sampleList;
+    }
+    [Tooltip("Index of main list determines puzzle stage, values of list within list determine lights on and off")]
+    [Header("PuzzleStage Light Switch Settings ")]
+    public List<LightSwitchNumbers> listOfSwitchNumbers = new List<LightSwitchNumbers>();
+
+
+    private void OnRayEvent(int puzzleStageNumber)
+    {
+        
 
         for (int i = puzzleStages.Count - 1; i >= 0; i--)
         {
             if (puzzleStages[i].isCompleted)
             {
-            
-                
-                /*
+                //here we send the Light Control event passing puzzle stage number as the index then access the list and pass indexes 0 1 as the ints
+                NewLightControl(0, listOfSwitchNumbers[currentPuzzleStage].sampleList[0]);
+                NewLightControl(1, listOfSwitchNumbers[currentPuzzleStage].sampleList[1]);
 
-                **FIND A WAY TO HAVE SOMETHING IN THE INSPECTOR THAT ALLOWS THE DESIGNER
-                TO SET WHICH LIGHTS GO OFF AT EACH PUZZLE STAGE WITHOUT HARD CODING**
 
-                */
+                Debug.Log("You have solved puzzle part" + currentPuzzleStage);
 
-                //turn off light source 1, turn on light source 2
-                //LightControl(0, false);
-               // LightControl(1, true);
+                // myTextDisplayController.ShowText("You have solved the entire the puzzle");
 
-                Debug.Log("You have solved the first part of the puzzle");
+                currentPuzzleStage++;
                 puzzleStages.RemoveAt(i);
             }
 
-
         }
-        
-      
-        // *******************ORIGINAL METHOD********************
-
-/*
-        switch (puzzleStage)
-        {
-            case 0:
-                if ((int)whichLightSource == 0 && puzzleTargetNumber == 1)
-                {
-                    //turn off light source 1, turn on light source 2
-                    LightControl(0, false);
-                    LightControl(1, true);
-
-                    Debug.Log("You have solved the first part of the puzzle");
-
-                    puzzleStage++;
-
-                    myTextDisplayController.ShowText("You have solved the first part of the puzzle");
-
-
-                }
-
-                break;
-
-            case 1:
-                if ((int)whichLightSource == 1 && puzzleTargetNumber == 2)
-                {
-                    //turn light source 1 back on and keep light source 2 on
-                    LightControl(0, true);
-                    LightControl(1, true);
-
-                    Debug.Log("You have solved the second part of the puzzle");
-
-                    puzzleStage++;
-
-                    myTextDisplayController.ShowText("You have solved the second part of the puzzle");
-                }
-
-                break;
-           
-                //part 3 and 4 of puzzle can be done in either order, uses a bool to check which order
-                //the player chooses.
-
-            case 2:
-                if ((int)whichLightSource == 0 && puzzleTargetNumber == 3)
-                {
-                    //keep both lights on
-                    Debug.Log("You have solved the third part of the puzzle");
-                    puzzleStage++;
-
-                    myTextDisplayController.ShowText("You have solved the third part of the puzzle");
-                    playerHitPuzzleTarget3First = true;
-                }
-
-                else if ((int)whichLightSource == 1 && puzzleTargetNumber == 4)
-                {
-                    //keep both lights on 
-                    Debug.Log("You have solved the third part of the puzzle");
-                    puzzleStage++;
-
-                    myTextDisplayController.ShowText("You have solved the third part of the puzzle");
-
-                    playerHitPuzzleTarget3First = false;
-                }
-                
-                break;
-
-            case 3:
-                if ((int)whichLightSource == 0 && puzzleTargetNumber == 3 && !playerHitPuzzleTarget3First)
-                {
-                    //turn all lights off
-                    LightControl(0, false);
-                    LightControl(1, false);
-                    Debug.Log("You have solved the whole of the puzzle");
-
-                    myTextDisplayController.ShowText("You have solved the entire the puzzle");
-                    puzzleStage++;
-                }
-
-                else if ((int)whichLightSource == 1 && puzzleTargetNumber == 4 && playerHitPuzzleTarget3First)
-                {
-                    //turn all lights off
-                    LightControl(0, false);
-                    LightControl(1, false);
-                    Debug.Log("You have solved the whole of the puzzle");
-
-                    myTextDisplayController.ShowText("You have solved the entire the puzzle");
-                    puzzleStage++;
-                }
-                
-
-                break;
-
-            default:
-
-                break;
-
-        }
-*/
 
     }
 
     // subscribe to events
     private void Awake()
     {
-        for (int i = 0; i < puzzleTargetsToObserve.Length; i++)
-        {
-
-            if (puzzleTargetsToObserve[i] != null)
-            {
-                puzzleTargetsToObserve[i].rayEvent += OnRayEvent;
-            }
-        }
-
-        //part of new method
         for (int i = 0; i < puzzleStages.Count; i++)
         {
 
@@ -196,21 +74,36 @@ public class PuzzleStageHandler : MonoBehaviour
                 puzzleStages[i].rayEvent += OnRayEvent;
             }
         }
+    }
 
+    private void OnEnable()
+    {
+        for (int i = 0; i < puzzleStages.Count; i++)
+        {
+
+            if (puzzleStages[i] != null)
+            {
+                puzzleStages[i].rayEvent += OnRayEvent;
+            }
+        }
     }
 
     //unsubscribe from events
 
     private void OnDestroy()
     {
-        for (int i = 0; i < puzzleTargetsToObserve.Length; i++)
+        for (int i = 0; i < puzzleStages.Count; i++)
+        {
 
-            if (puzzleTargetsToObserve[i] != null)
+            if (puzzleStages[i] != null)
             {
-                puzzleTargetsToObserve[i].rayEvent -= OnRayEvent;
+                puzzleStages[i].rayEvent -= OnRayEvent;
             }
+        }
+    }
 
-        // part of new method
+    private void OnDisable()
+    {
         for (int i = 0; i < puzzleStages.Count; i++)
         {
 
