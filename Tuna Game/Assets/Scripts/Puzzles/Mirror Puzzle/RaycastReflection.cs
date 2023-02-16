@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum LightSourceID {LightSourceID1, LightSourceID2}
 
 [RequireComponent(typeof(LineRenderer))]

@@ -16,18 +16,18 @@ public class LightController : MonoBehaviour
     //references to the two light sources, each containing their own RaycastReflection class
    
 
-    public RaycastReflection[] lightSourceArray; 
+    public RaycastReflection[] lightSourceArray;
 
 
     private void Start()
     {
         //turn light source 1 on for first stage
-        lightSourceArray.FirstOrDefault(x => (int)x.ID == 0).lightIsOn = true; 
+        lightSourceArray.FirstOrDefault(x => (int)x.ID == 0).lightIsOn = true;
     }
 
     //function which receives info via the LightControl event in PuzzleStageHandler class
     // then handles logic and controls a bool on the RaycastReflection class
-    void OnLightControl(int whichLightSource, bool onOff)
+    public void OnLightControl(int whichLightSource, bool onOff)
     {
 
         Debug.Log("hit by " + whichLightSource);
@@ -37,6 +37,11 @@ public class LightController : MonoBehaviour
 
     }
 
+
+    public void ControlMyLights(int whichLightSource, int hello)
+    {
+
+    }
 
     private void OnEnable()
     {

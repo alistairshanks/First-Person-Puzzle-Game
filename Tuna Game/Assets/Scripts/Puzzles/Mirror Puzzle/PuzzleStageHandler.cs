@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
+
+
 
 public class PuzzleStageHandler : MonoBehaviour
 {
@@ -18,15 +21,25 @@ public class PuzzleStageHandler : MonoBehaviour
     [SerializeField] private MirrorPuzzleTarget[] puzzleTargetsToObserve;
 
     //stores which stage puzzle is at, used in the switch function
-    [SerializeField] private int puzzleStage = 0;
+    [SerializeField] private int currentPuzzleStage = 0;
 
     //stores whether player hit puzzle target 3 or 4 first as these can be done in either order
     private bool playerHitPuzzleTarget3First;
-    
+
     //action to send to LightController class to turn lights on and off
     public event Action<int, bool> LightControl;
 
     public TextDisplayController myTextDisplayController;
+
+    [SerializeField] private List<PuzzleStage> puzzleStages;
+    
+
+
+
+
+
+
+
 
 
 
@@ -34,8 +47,36 @@ public class PuzzleStageHandler : MonoBehaviour
 
     private void OnRayEvent(LightSourceID whichLightSource, int puzzleTargetNumber)
     {
-        //Debug.Log("event was received and the light was sent by light source " + whichLightSource);
+        // ***************trying new method***************
 
+        for (int i = puzzleStages.Count - 1; i >= 0; i--)
+        {
+            if (puzzleStages[i].isCompleted)
+            {
+            
+                
+                /*
+
+                **FIND A WAY TO HAVE SOMETHING IN THE INSPECTOR THAT ALLOWS THE DESIGNER
+                TO SET WHICH LIGHTS GO OFF AT EACH PUZZLE STAGE WITHOUT HARD CODING**
+
+                */
+
+                //turn off light source 1, turn on light source 2
+                //LightControl(0, false);
+               // LightControl(1, true);
+
+                Debug.Log("You have solved the first part of the puzzle");
+                puzzleStages.RemoveAt(i);
+            }
+
+
+        }
+        
+      
+        // *******************ORIGINAL METHOD********************
+
+/*
         switch (puzzleStage)
         {
             case 0:
@@ -130,9 +171,11 @@ public class PuzzleStageHandler : MonoBehaviour
                 break;
 
         }
+*/
 
     }
 
+    // subscribe to events
     private void Awake()
     {
         for (int i = 0; i < puzzleTargetsToObserve.Length; i++)
@@ -143,11 +186,20 @@ public class PuzzleStageHandler : MonoBehaviour
                 puzzleTargetsToObserve[i].rayEvent += OnRayEvent;
             }
         }
-     
 
+        //part of new method
+        for (int i = 0; i < puzzleStages.Count; i++)
+        {
+
+            if (puzzleStages[i] != null)
+            {
+                puzzleStages[i].rayEvent += OnRayEvent;
+            }
+        }
 
     }
 
+    //unsubscribe from events
 
     private void OnDestroy()
     {
@@ -157,6 +209,16 @@ public class PuzzleStageHandler : MonoBehaviour
             {
                 puzzleTargetsToObserve[i].rayEvent -= OnRayEvent;
             }
+
+        // part of new method
+        for (int i = 0; i < puzzleStages.Count; i++)
+        {
+
+            if (puzzleStages[i] != null)
+            {
+                puzzleStages[i].rayEvent -= OnRayEvent;
+            }
+        }
     }
 
 }

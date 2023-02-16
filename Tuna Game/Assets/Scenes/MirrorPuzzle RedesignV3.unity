@@ -2252,8 +2252,13 @@ MonoBehaviour:
   - {fileID: 1598595184}
   - {fileID: 1092604096}
   - {fileID: 1797204746}
-  puzzleStage: 0
+  currentPuzzleStage: 0
   myTextDisplayController: {fileID: 1160515619}
+  puzzleStages:
+  - {fileID: 5646182503740009429}
+  - {fileID: 5646182503740009428}
+  - {fileID: 5646182503740009431}
+  - {fileID: 5646182503740009430}
 --- !u!4 &1496717538
 Transform:
   m_ObjectHideFlags: 0
@@ -2778,10 +2783,38 @@ PrefabInstance:
       propertyPath: m_TagString
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: puzzleStageNumber
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.data[0]
+      value: 
+      objectReference: {fileID: 5646182503740009429}
+    - target: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.data[1]
+      value: 
+      objectReference: {fileID: 5646182503740009428}
     - target: {fileID: 2175832619380966228, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: m_TagString
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: puzzleStageNumber
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.data[0]
+      value: 
+      objectReference: {fileID: 5646182503740009429}
     - target: {fileID: 3013159187865466544, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2810,9 +2843,29 @@ PrefabInstance:
       propertyPath: t.z
       value: 5.500001
       objectReference: {fileID: 0}
+    - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: puzzleStageNumber
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.data[0]
+      value: 
+      objectReference: {fileID: 5646182503740009429}
+    - target: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: prerequisitepuzzleStages.Array.data[1]
+      value: 
+      objectReference: {fileID: 5646182503740009428}
     - target: {fileID: 4981118793551943519, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: m_TagString
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5164597469056829652, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+      propertyPath: puzzleStageNumber
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5189059395517272938, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
       propertyPath: puzzleTargetNumber
@@ -2924,3 +2977,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+--- !u!114 &5646182503740009428 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2498159739683561368, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+  m_PrefabInstance: {fileID: 5646182503740009427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0772453d7da63134ab902aee0871cbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5646182503740009429 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5164597469056829652, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+  m_PrefabInstance: {fileID: 5646182503740009427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0772453d7da63134ab902aee0871cbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5646182503740009430 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4723983151982558324, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+  m_PrefabInstance: {fileID: 5646182503740009427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0772453d7da63134ab902aee0871cbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5646182503740009431 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2071153435499371743, guid: 0d05db2aff0cbcd4db1818aa16dd9269, type: 3}
+  m_PrefabInstance: {fileID: 5646182503740009427}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0772453d7da63134ab902aee0871cbf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
