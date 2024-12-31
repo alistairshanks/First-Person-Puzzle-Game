@@ -10,6 +10,10 @@ public class PlayerInteraction : MonoBehaviour
      and the ray hits something which has a class containing the function PlayerInteract()
      then this function is triggered. This allows player to interact with any objects containing
      a class which inherits from PlayerInteractable class.
+
+     Note make "F" variable and serialize so that interact key can be changed dynamically.
+
+
     */
 
 
